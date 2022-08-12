@@ -1,0 +1,22 @@
+﻿@model VideoModel
+
+<p>Add a video</p>
+
+<form method="post">
+
+    <div>
+        <label asp-for="Name">Video Name</label>
+        <input asp-for="Name"/>
+    </div>
+    <div>
+        <label asp-for="Rating">Video Rating (1-5)</label>
+        <input asp-for="Rating"/>
+    </div>
+
+
+    <button type="submit">Add</button>
+
+    @if(!string.IsNullOrEmpty(Model.Message)){
+        <div class="text-warning">@Model.Message</div>
+    }
+</form>

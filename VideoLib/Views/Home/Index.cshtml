@@ -1,0 +1,52 @@
+﻿@using VideoLib.Data
+@model SearchModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Search for a video by title or <a href="/home/addvideo">add one</a></p>
+
+    <form method="post">
+
+        <input asp-for="SearchTerm" />
+
+        <button type="submit">Find</button>
+
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div class="text-warning">@Model.Message</div>
+        }
+
+    </form>
+
+
+    @if (Model.Searched)
+    {
+        if (Model.SearchResults.Count > 0)
+        {
+            //show the results
+            <p>Your search for <strong>@Model.SearchTerm</strong> return @Model.SearchResults.Count() results</p>
+            <table>
+                <tr>
+                    <td style="width:200px;">Film Name</td>
+                    <td>Rating</td>
+                </tr>
+                @foreach (VideoAsset vr in Model.SearchResults)
+                {
+                    <tr>
+                        <td>@vr.Name</td>
+                        <td>@vr.Rating</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>No Results match your search term <strong>@Model.SearchTerm</strong> please <a href="/home/addvideo">add one</a></p>
+        }
+    }
+
+</div>
